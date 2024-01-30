@@ -1,16 +1,14 @@
 package org.example.mafiawebsocket.user.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.util.UUID;
 
 @Entity
 @Getter
-public class User {
+@Table(name = "userInfo")
+public class UserInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
