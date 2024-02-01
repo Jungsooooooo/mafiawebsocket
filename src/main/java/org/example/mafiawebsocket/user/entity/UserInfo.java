@@ -23,12 +23,19 @@ public class UserInfo {
 
     private String name;
     private String password;
+    private String role;
 
     @Builder
-    public UserInfo(String name, String password){
+    public UserInfo(String name, String password, String role){
         this.name       = name;
         this.password   = password;
         this.uuid       = UUID.randomUUID();
+
+        if(role.isEmpty()){
+            this.role = "normal_user";
+        } else {
+            this.role = role;
+        }
     }
 
 }

@@ -1,13 +1,17 @@
 package org.example.mafiawebsocket.user.service.impl;
 
+import org.example.mafiawebsocket.user.dto.UserInfoJoinRequestDto;
 import org.example.mafiawebsocket.user.entity.UserInfo;
 import org.example.mafiawebsocket.user.service.UserInfoService;
 
 public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
-    public UserInfo createUser(String name, String password) {
+    public UserInfo createUser(UserInfoJoinRequestDto userInfoJoinRequestDto) {
 
-        return UserInfo.builder().name(name).password(password).build();
+        return UserInfo.builder().name(userInfoJoinRequestDto.getName())
+                                 .password(userInfoJoinRequestDto.getPassword())
+                                 .role(userInfoJoinRequestDto.getRole())
+                                 .build();
     }
 }
