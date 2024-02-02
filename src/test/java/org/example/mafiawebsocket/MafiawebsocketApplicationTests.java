@@ -1,6 +1,8 @@
 package org.example.mafiawebsocket;
 
+import jakarta.transaction.Transactional;
 import org.example.mafiawebsocket.user.dto.UserInfoJoinRequestDto;
+import org.example.mafiawebsocket.user.entity.UserInfo;
 import org.example.mafiawebsocket.user.service.UserInfoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +18,12 @@ class MafiawebsocketApplicationTests {
 	}
 
 	@Test
-	void test123(){
+	@Transactional
+	void testCreateUser(){
 		UserInfoJoinRequestDto userInfoJoinRequestDto = new UserInfoJoinRequestDto();
 		userInfoJoinRequestDto.setName("test");
 
-		userInfoService.createUser(userInfoJoinRequestDto);
-		System.out.println("hi");
+		UserInfo user =userInfoService.createUser(userInfoJoinRequestDto);
 	}
 
 
