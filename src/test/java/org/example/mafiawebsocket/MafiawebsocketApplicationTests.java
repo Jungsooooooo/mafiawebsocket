@@ -25,6 +25,4 @@ class MafiawebsocketApplicationTests {
 
 		UserInfo user =userInfoService.createUser(userInfoJoinRequestDto);
 	}
-
-
 }
