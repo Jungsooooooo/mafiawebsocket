@@ -31,10 +31,10 @@ public class UserInfo {
         this.password   = password;
         this.uuid       = UUID.randomUUID();
 
-        if(role.isEmpty()){
+        if(role == null){
             this.role = "normal_user";
         } else {
-            this.role = role;
+            this.role = null;
         }
     }
 
