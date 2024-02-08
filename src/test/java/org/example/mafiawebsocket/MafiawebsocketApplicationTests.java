@@ -8,12 +8,16 @@ import org.example.mafiawebsocket.user.service.UserInfoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootTest
 class MafiawebsocketApplicationTests {
 
 	@Autowired
 	private  UserInfoService userInfoService;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
     @Test
 	void contextLoads() {
 	}
@@ -23,8 +27,8 @@ class MafiawebsocketApplicationTests {
 	void testCreateUser(){
 		UserInfoJoinRequestDto userInfoJoinRequestDto = new UserInfoJoinRequestDto();
 		ShaUtil shaUtil = new ShaUtil();
-		userInfoJoinRequestDto.setName("test");
-		userInfoJoinRequestDto.setPassword(shaUtil.sha256Encode("1234"));
+		userInfoJoinRequestDto.setName("test1");
+		userInfoJoinRequestDto.setPassword("1234");
 
 		UserInfo user =userInfoService.createUser(userInfoJoinRequestDto);
 	}
