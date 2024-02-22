@@ -21,13 +21,13 @@ public class UserInfo {
 
     private UUID uuid;
 
-    private String name;
+    private String username;
     private String password;
     private String role;
 
     @Builder
     public UserInfo(String name, String password, String role){
-        this.name       = name;
+        this.username       = name;
         this.password   = password;
         this.uuid       = UUID.randomUUID();
 

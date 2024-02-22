@@ -41,7 +41,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public UserInfo getUser(UserInfoLoginRequestDto userInfoLoginRequestDto) {
         ShaUtil shaUtil = new ShaUtil();
-        String id = userInfoLoginRequestDto.getName();
+        String id = userInfoLoginRequestDto.getUsername();
         String password = passwordEncoder.encode(userInfoLoginRequestDto.getPassword());
 
         return userInfoRepository.findByNameAndPassword(id,password);
