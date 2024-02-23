@@ -3,7 +3,7 @@ package org.example.mafiawebsocket.user.controller;
 import org.example.mafiawebsocket.user.dto.UserInfoJoinRequestDto;
 import org.example.mafiawebsocket.user.dto.UserInfoLoginRequestDto;
 import org.example.mafiawebsocket.user.dto.UserInfoResponseDto;
-import org.example.mafiawebsocket.user.entity.UserInfo;
+import org.example.mafiawebsocket.user.entity.User;
 import org.example.mafiawebsocket.user.service.UserInfoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,7 @@ public class UserController {
     @PostMapping("/join")
     public ResponseEntity<?> createUsers(@RequestBody UserInfoJoinRequestDto userInfoJoinRequestDto){
 
-        UserInfo userInfo = userInfoService.createUser(userInfoJoinRequestDto);
+        User userInfo = userInfoService.createUser(userInfoJoinRequestDto);
         UserInfoResponseDto userInfoResponseDto = new UserInfoResponseDto(userInfo);
         return new ResponseEntity<>(userInfoResponseDto,HttpStatus.OK);
     }
@@ -35,7 +35,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserInfoLoginRequestDto userInfoLoginRequestDto){
 
-        UserInfo userInfo = userInfoService.getUser(userInfoLoginRequestDto);
+        User userInfo = userInfoService.getUser(userInfoLoginRequestDto);
 
         return new ResponseEntity<>(userInfo,HttpStatus.OK);
     }

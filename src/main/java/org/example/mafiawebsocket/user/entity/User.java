@@ -1,6 +1,6 @@
 package org.example.mafiawebsocket.user.entity;
 
-import ch.qos.logback.classic.spi.LoggingEventVO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -11,9 +11,9 @@ import java.util.UUID;
 
 @Entity
 @Getter
-@Table(name = "userInfo")
+@Table(name = "users")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserInfo {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +25,11 @@ public class UserInfo {
     private String password;
     private String role;
 
+    @JsonIgnore
+    private boolean activated;
+
     @Builder
-    public UserInfo(String name, String password, String role){
+    public User(String name, String password, String role){
         this.username       = name;
         this.password   = password;
         this.uuid       = UUID.randomUUID();

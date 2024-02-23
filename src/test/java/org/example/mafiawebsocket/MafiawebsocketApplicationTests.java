@@ -3,7 +3,7 @@ package org.example.mafiawebsocket;
 import jakarta.transaction.Transactional;
 import org.example.mafiawebsocket.commonutil.ShaUtil;
 import org.example.mafiawebsocket.user.dto.UserInfoJoinRequestDto;
-import org.example.mafiawebsocket.user.entity.UserInfo;
+import org.example.mafiawebsocket.user.entity.User;
 import org.example.mafiawebsocket.user.service.UserInfoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +27,10 @@ class MafiawebsocketApplicationTests {
 	void testCreateUser(){
 		UserInfoJoinRequestDto userInfoJoinRequestDto = new UserInfoJoinRequestDto();
 		ShaUtil shaUtil = new ShaUtil();
-		userInfoJoinRequestDto.setName("test1");
+		userInfoJoinRequestDto.setUsername("test1");
 		userInfoJoinRequestDto.setPassword("1234");
 
-		UserInfo user =userInfoService.createUser(userInfoJoinRequestDto);
+		User user =userInfoService.createUser(userInfoJoinRequestDto);
 	}
 
 	@Test
