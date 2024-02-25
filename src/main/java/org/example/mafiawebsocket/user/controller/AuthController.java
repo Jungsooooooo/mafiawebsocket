@@ -5,6 +5,8 @@ import org.example.mafiawebsocket.token.JwtFilter;
 import org.example.mafiawebsocket.token.TokenProvider;
 import org.example.mafiawebsocket.user.dto.TokenDto;
 import org.example.mafiawebsocket.user.dto.UserInfoLoginRequestDto;
+import org.example.mafiawebsocket.user.entity.User;
+import org.example.mafiawebsocket.user.service.UserInfoService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +26,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
+    private final UserInfoService userInfoService;
 
     @PostMapping("/authenticate")
     public ResponseEntity<TokenDto> authorize(@Validated @RequestBody UserInfoLoginRequestDto loginDto) {
+        User userInfo = userInfoService.getUser(loginDto);
 
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
