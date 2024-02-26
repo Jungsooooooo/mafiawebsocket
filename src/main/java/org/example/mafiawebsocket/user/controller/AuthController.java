@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
@@ -29,8 +31,12 @@ public class AuthController {
     private final UserInfoService userInfoService;
 
     @PostMapping("/authenticate")
-    public ResponseEntity<TokenDto> authorize(@Validated @RequestBody UserInfoLoginRequestDto loginDto) {
-        User userInfo = userInfoService.getUser(loginDto);
+    public ResponseEntity<TokenDto> authorize(@Validated @RequestBody UserInfoLoginRequestDto loginDto) throws Exception {
+        Optional<User> userInfo = userInfoService.getUser(loginDto);
+
+        if(userInfo.isEmpty()){
+            throw new Exception(loginDto.getUsername() + " -> 해당 아이디가 없습니다.");
+        }
 
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());

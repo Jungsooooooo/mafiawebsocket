@@ -9,6 +9,8 @@ import org.example.mafiawebsocket.user.service.UserInfoService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
 
@@ -36,12 +38,19 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public User getUser(UserInfoLoginRequestDto userInfoLoginRequestDto) {
-        ShaUtil shaUtil = new ShaUtil();
+    public Optional<User> getUser(UserInfoLoginRequestDto userInfoLoginRequestDto) {
         String id = userInfoLoginRequestDto.getUsername();
         String password = passwordEncoder.encode(userInfoLoginRequestDto.getPassword());
 
-        return userInfoRepository.findByUsernameAndPassword(id,password);
+        boolean passwordMatches = passwordEncoder.matches(userInfoLoginRequestDto.getPassword(), password);
+
+        if(passwordMatches){
+            Optional<User> userCheck = userInfoRepository.findByUsername(id);
+            return userCheck;
+        } else {
+            return Optional.empty();
+        }
+
     }
 
 
