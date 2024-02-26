@@ -25,19 +25,11 @@ public class UserController {
     }
 
     @PostMapping("/join")
-    public ResponseEntity<?> createUsers(@RequestBody UserInfoJoinRequestDto userInfoJoinRequestDto){
+    public ResponseEntity<?> createUsers(@RequestBody UserInfoJoinRequestDto userInfoJoinRequestDto) {
 
         User userInfo = userInfoService.createUser(userInfoJoinRequestDto);
         UserInfoResponseDto userInfoResponseDto = new UserInfoResponseDto(userInfo);
-        return new ResponseEntity<>(userInfoResponseDto,HttpStatus.OK);
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserInfoLoginRequestDto userInfoLoginRequestDto){
-
-        User userInfo = userInfoService.getUser(userInfoLoginRequestDto);
-
-        return new ResponseEntity<>(userInfo,HttpStatus.OK);
+        return new ResponseEntity<>(userInfoResponseDto, HttpStatus.OK);
     }
 
 }

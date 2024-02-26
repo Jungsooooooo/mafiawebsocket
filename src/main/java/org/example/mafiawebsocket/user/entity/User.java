@@ -33,7 +33,7 @@ public class User {
         this.username       = name;
         this.password   = password;
         this.uuid       = UUID.randomUUID();
-
+        this.activated  = true;
         if(role == null){
             this.role = "normal_user";
         } else {
