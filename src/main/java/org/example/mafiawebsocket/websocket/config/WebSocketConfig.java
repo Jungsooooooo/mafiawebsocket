@@ -1,36 +1,21 @@
 package org.example.mafiawebsocket.websocket.config;
 
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.context.annotation.Configuration;
-import org.springframework.messaging.simp.config.ChannelRegistration;
-import org.springframework.messaging.simp.config.MessageBrokerRegistry;
-import org.springframework.web.socket.config.annotation.*;
+import org.springframework.web.socket.WebSocketHandler;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 @Configuration
+@EnableWebSocket
 @RequiredArgsConstructor
-@EnableWebSocketMessageBroker
-public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+public class WebSocketConfig implements WebSocketConfigurer {
 
-    private final WebsocketSecurityInterceptor websocketSecurityInterceptor;
-
-    @Override
-    public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/wait-service/wait-websocket")
-                .addInterceptors(new CustomHandshakeInterceptor())
-                .setAllowedOriginPatterns("*")
-                .withSockJS();
-    }
+    private final WebSocketHandler webSocketHandler;
 
     @Override
-    public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.enableSimpleBroker("/wait-service/waitroom/sub", "/queue");
-        registry.setApplicationDestinationPrefixes("/wait-service");
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        registry.addHandler(webSocketHandler, "/test").setAllowedOrigins("*");
     }
-
-    @Override
-    public void configureClientInboundChannel(ChannelRegistration registration) {
-        registration.interceptors(websocketSecurityInterceptor);
-    }
-
 }
