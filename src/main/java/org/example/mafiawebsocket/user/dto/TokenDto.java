@@ -12,4 +12,12 @@ import lombok.NoArgsConstructor;
 public class TokenDto {
 
     private String token;
+    private String username;
+    private String uuid;
+
+    public TokenDto(String jwt, UserInfoResponseDto loginDto) {
+        this.token       = jwt;
+        this.username    = loginDto.getUsername();
+
+    }
 }

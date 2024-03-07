@@ -5,6 +5,7 @@ import org.example.mafiawebsocket.token.JwtFilter;
 import org.example.mafiawebsocket.token.TokenProvider;
 import org.example.mafiawebsocket.user.dto.TokenDto;
 import org.example.mafiawebsocket.user.dto.UserInfoLoginRequestDto;
+import org.example.mafiawebsocket.user.dto.UserInfoResponseDto;
 import org.example.mafiawebsocket.user.entity.User;
 import org.example.mafiawebsocket.user.service.UserInfoService;
 import org.springframework.http.HttpHeaders;
@@ -53,6 +54,6 @@ public class AuthController {
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
 
         // tokenDto를 이용해 response body에도 넣어서 리턴
-        return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
+        return new ResponseEntity<>(new TokenDto(jwt,new UserInfoResponseDto(userInfo.get())), httpHeaders, HttpStatus.OK);
     }
 }
