@@ -32,4 +32,13 @@ public class UserController {
         return new ResponseEntity<>(userInfoResponseDto, HttpStatus.OK);
     }
 
+    @PostMapping("/checkid")
+    public ResponseEntity<?> checkId(@RequestBody UserInfoJoinRequestDto userInfoJoinRequestDto){
+
+        boolean checkId = userInfoService.checkUserId(userInfoJoinRequestDto);
+
+        return new ResponseEntity<>(checkId,HttpStatus.OK);
+    }
+
+
 }

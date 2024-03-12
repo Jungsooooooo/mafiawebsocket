@@ -53,5 +53,20 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     }
 
+    @Override
+    public Boolean checkUserId(UserInfoJoinRequestDto userInfoJoinRequestDto) {
+
+        String id = userInfoJoinRequestDto.getUsername();
+
+        Optional<User> userCheck = userInfoRepository.findByUsername(id);
+
+        boolean checkId = false;
+        if(!userCheck.isEmpty()){
+            checkId  = true;
+        }
+
+        return checkId;
+    }
+
 
 }
