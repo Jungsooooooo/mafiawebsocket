@@ -2,6 +2,8 @@ package org.example.mafiawebsocket.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,7 +23,11 @@ public class User {
 
     private UUID uuid;
 
+    @NotNull
+    @Min(value = 10000000, message = "숫자는 8자리 이상이어야 합니다.")
     private String username;
+
+    @NotNull
     private String password;
     private String role;
 
