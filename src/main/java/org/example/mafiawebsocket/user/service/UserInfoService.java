@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface UserInfoService {
 
-    public User createUser(UserInfoJoinRequestDto userInfoJoinRequestDto);
+    public User createUser(UserInfoJoinRequestDto userInfoJoinRequestDto) throws Exception;
     public Optional<User> getUser(UserInfoLoginRequestDto userInfoLoginRequestDto);
 
     public Boolean checkUserId(UserInfoJoinRequestDto userInfoJoinRequestDto);

@@ -25,9 +25,14 @@ public class UserController {
     }
 
     @PostMapping("/join")
-    public ResponseEntity<?> createUsers(@RequestBody UserInfoJoinRequestDto userInfoJoinRequestDto) {
+    public ResponseEntity<?> createUsers(@RequestBody UserInfoJoinRequestDto userInfoJoinRequestDto) throws Exception{
 
-        User userInfo = userInfoService.createUser(userInfoJoinRequestDto);
+        User userInfo = null;
+        try {
+             userInfo = userInfoService.createUser(userInfoJoinRequestDto);
+        } catch(Exception e){
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
+        }
         UserInfoResponseDto userInfoResponseDto = new UserInfoResponseDto(userInfo);
         return new ResponseEntity<>(userInfoResponseDto, HttpStatus.OK);
     }

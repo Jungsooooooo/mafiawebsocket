@@ -25,15 +25,23 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public User createUser(UserInfoJoinRequestDto userInfoJoinRequestDto) {
+    public User createUser(UserInfoJoinRequestDto userInfoJoinRequestDto) throws Exception {
         ShaUtil shaUtil = new ShaUtil();
+
+        if(userInfoJoinRequestDto.getPassword().length() < 8){
+            throw new Exception("비밀번호는 8자리 이상이어야 합니다");
+        }
+
         String pwd = passwordEncoder.encode(userInfoJoinRequestDto.getPassword());
         User userInfo = User.builder().name(userInfoJoinRequestDto.getUsername())
                 .password(passwordEncoder.encode(userInfoJoinRequestDto.getPassword()))
                 .role(userInfoJoinRequestDto.getRole())
                 .build();
-        userInfoRepository.save(userInfo);
-
+       try {
+           userInfoRepository.save(userInfo);
+       } catch (Exception e){
+           e.printStackTrace();
+       }
         return userInfo;
     }
 
