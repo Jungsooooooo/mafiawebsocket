@@ -19,16 +19,16 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private UUID uuid;
 
     @NotNull
-    @Min(value = 10000000, message = "숫자는 8자리 이상이어야 합니다.")
     private String username;
 
     @NotNull
     private String password;
+
     private String role;
 
     @JsonIgnore

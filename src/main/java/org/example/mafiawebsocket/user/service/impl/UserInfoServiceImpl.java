@@ -37,11 +37,9 @@ public class UserInfoServiceImpl implements UserInfoService {
                 .password(passwordEncoder.encode(userInfoJoinRequestDto.getPassword()))
                 .role(userInfoJoinRequestDto.getRole())
                 .build();
-       try {
+
            userInfoRepository.save(userInfo);
-       } catch (Exception e){
-           e.printStackTrace();
-       }
+
         return userInfo;
     }
 
