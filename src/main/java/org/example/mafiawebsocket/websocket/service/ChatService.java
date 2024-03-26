@@ -32,13 +32,14 @@ public class ChatService {
         return chatRooms.get(roomId);
     }
 
-    public ChatRoom createRoom(String name) {
+    public ChatRoom createRoom(String name,String owner) {
         String roomId = UUID.randomUUID().toString(); // 랜덤한 방 아이디 생성
 
         // Builder 를 이용해서 ChatRoom 을 Building
         ChatRoom room = ChatRoom.builder()
                 .roomId(roomId)
                 .name(name)
+                .owner(owner)
                 .build();
 
         chatRooms.put(roomId, room); // 랜덤 아이디와 room 정보를 Map 에 저장
