@@ -13,13 +13,15 @@ public class ChatRoom {
     private String roomId; // 채팅방 아이디
     private String name; // 채팅방 이름
     private String owner;
+    private String status;
     private Set<WebSocketSession> sessions = new HashSet<>();
 
     @Builder
-    public ChatRoom(String roomId, String name, String owner){
+    public ChatRoom(String roomId, String name, String owner, String status){
         this.roomId = roomId;
         this.name   = name;
         this.owner  = owner;
+        this.status = status;
     }
 
     public void handleAction(WebSocketSession session, ChatDTO message, ChatService service) {
