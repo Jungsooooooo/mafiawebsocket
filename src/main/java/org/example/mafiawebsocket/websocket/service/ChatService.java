@@ -28,7 +28,27 @@ public class ChatService {
         return new ArrayList<>(chatRooms.values());
     }
 
+    public List<ChatRoom> findWaitingAllRoom(String status){
+
+        List<ChatRoom> chatRoomAll = new ArrayList<>(chatRooms.values());
+
+        List<ChatRoom> chatWaitingRoomAll = new ArrayList<>();
+        for (ChatRoom chatRoom : chatRoomAll) {
+                if (chatRoom.getStatus().equals("wait")) {
+                    chatWaitingRoomAll.add(chatRoom);
+                }
+            }
+
+        return chatWaitingRoomAll;
+    }
+
     public ChatRoom findRoomById(String roomId){
+
+        List<ChatRoom> chatRoomAll = new ArrayList<ChatRoom>(chatRooms.values());
+
+        List<ChatRoom> chatWaitingRoomAll = new ArrayList<>();
+        chatRoomAll.removeIf(chatRoom -> chatRoom.getRoomId().equals(roomId));
+
         return chatRooms.get(roomId);
     }
 
@@ -43,7 +63,18 @@ public class ChatService {
                 .build();
 
         chatRooms.put(roomId, room); // 랜덤 아이디와 room 정보를 Map 에 저장
+
         return room;
+    }
+
+    public void
+    deleteRoom(String roomId){
+
+        List<ChatRoom> chatRoomAll = new ArrayList<ChatRoom>(chatRooms.values());
+
+        chatRooms.remove(roomId);
+
+//        chatRooms.
     }
 
     public <T> void sendMessage(WebSocketSession session, T message) {

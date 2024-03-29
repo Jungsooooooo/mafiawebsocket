@@ -21,6 +21,11 @@ public class ChatController {
         return service.createRoom(name,owner);
     }
 
+    @PostMapping("/delete")
+    public void deleteRoom(@RequestBody String id){
+         service.deleteRoom(id);
+    }
+
     @GetMapping
     public List<ChatRoom> findAllRooms(){
         return service.findAllRoom();
