@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.example.mafiawebsocket.websocket.dto.ChatDTO;
 import org.example.mafiawebsocket.websocket.dto.ChatRoom;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
@@ -52,14 +53,14 @@ public class ChatService {
         return chatRooms.get(roomId);
     }
 
-    public ChatRoom createRoom(String name,String owner) {
+    public ChatRoom createRoom(ChatRoom chatRoom) {
         String roomId = UUID.randomUUID().toString(); // 랜덤한 방 아이디 생성
 
         // Builder 를 이용해서 ChatRoom 을 Building
         ChatRoom room = ChatRoom.builder()
                 .roomId(roomId)
-                .name(name)
-                .owner(owner)
+                .name(chatRoom.getName())
+                .owner(chatRoom.getOwner())
                 .build();
 
         chatRooms.put(roomId, room); // 랜덤 아이디와 room 정보를 Map 에 저장

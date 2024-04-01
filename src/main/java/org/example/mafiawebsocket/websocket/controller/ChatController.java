@@ -18,8 +18,8 @@ public class ChatController {
     private final ChatService service;
 
     @PostMapping
-    public ChatRoom createRoom(@RequestBody String name,String owner){
-        return service.createRoom(name,owner);
+    public ChatRoom createRoom(@RequestBody ChatRoom chatRoom){
+        return service.createRoom(chatRoom);
     }
 
     @PostMapping("/delete")
