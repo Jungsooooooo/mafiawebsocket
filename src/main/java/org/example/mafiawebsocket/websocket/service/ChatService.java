@@ -72,8 +72,10 @@ public class ChatService {
 
         List<ChatRoom> chatRoomAll = new ArrayList<ChatRoom>(chatRooms.values());
 
-        chatRooms.remove(roomId);
+//        chatRooms.remove(roomId);
+        ChatRoom cr = chatRooms.get(roomId);
 
+        chatRooms.remove(roomId);
 //        chatRooms.
     }
 
