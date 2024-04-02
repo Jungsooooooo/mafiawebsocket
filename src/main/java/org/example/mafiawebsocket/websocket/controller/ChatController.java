@@ -27,6 +27,11 @@ public class ChatController {
          service.deleteRoom(chatDTO.getRoomId());
     }
 
+    @PostMapping("/start")
+    public ChatRoom startRoom(@RequestBody ChatDTO chatDTO){
+       return service.updateRoom(chatDTO.getRoomId());
+    }
+
     @GetMapping
     public List<ChatRoom> findAllRooms(){
         return service.findAllRoom();

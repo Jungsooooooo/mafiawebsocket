@@ -48,7 +48,6 @@ public class ChatService {
         List<ChatRoom> chatRoomAll = new ArrayList<ChatRoom>(chatRooms.values());
 
         List<ChatRoom> chatWaitingRoomAll = new ArrayList<>();
-        chatRoomAll.removeIf(chatRoom -> chatRoom.getRoomId().equals(roomId));
 
         return chatRooms.get(roomId);
     }
@@ -78,6 +77,15 @@ public class ChatService {
 
         chatRooms.remove(roomId);
 //        chatRooms.
+    }
+
+    public ChatRoom updateRoom(String roomId){
+
+//        chatRooms.remove(roomId);
+        ChatRoom cr = chatRooms.get(roomId);
+
+        cr.setStatus("start");
+        return cr;
     }
 
     public <T> void sendMessage(WebSocketSession session, T message) {
