@@ -13,7 +13,6 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @Configuration
 @EnableWebSocket
 @RequiredArgsConstructor
-
 public class WebConfig implements WebSocketConfigurer {
 
     // WebSocketHandler 에 관한 생성자 추가
