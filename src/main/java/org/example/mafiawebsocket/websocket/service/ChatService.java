@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.example.mafiawebsocket.websocket.dto.ChatDTO;
 import org.example.mafiawebsocket.websocket.dto.ChatRoom;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -32,10 +35,17 @@ public class ChatService {
     public List<ChatRoom> findWaitingAllRoom(String status){
 
         List<ChatRoom> chatRoomAll = new ArrayList<>(chatRooms.values());
+        int page = 0;
+        int size = 1;
+        PageRequest pageRequest = PageRequest.of(page, size);
 
+        int start = (int) pageRequest.getOffset();
+        int end = Math.min((start + pageRequest.getPageSize()), chatRoomAll.size());
+
+        Page<ChatRoom> test = new PageImpl<>(chatRoomAll.subList(start,end),pageRequest,chatRoomAll.size());
         List<ChatRoom> chatWaitingRoomAll = new ArrayList<>();
         for (ChatRoom chatRoom : chatRoomAll) {
-                if (chatRoom.getStatus().equals("wait")) {
+                if (chatRoom.getStatus().equals("waiting")) {
                     chatWaitingRoomAll.add(chatRoom);
                 }
             }
@@ -60,6 +70,7 @@ public class ChatService {
                 .roomId(roomId)
                 .name(chatRoom.getName())
                 .owner(chatRoom.getOwner())
+                .status("waiting")
                 .build();
 
         chatRooms.put(roomId, room); // 랜덤 아이디와 room 정보를 Map 에 저장
