@@ -45,7 +45,7 @@ public class ChatService {
         Page<ChatRoom> test = new PageImpl<>(chatRoomAll.subList(start,end),pageRequest,chatRoomAll.size());
         List<ChatRoom> chatWaitingRoomAll = new ArrayList<>();
         for (ChatRoom chatRoom : chatRoomAll) {
-                if (chatRoom.getStatus().equals("waiting")) {
+                if (chatRoom.getStatus().equals(status)) {
                     chatWaitingRoomAll.add(chatRoom);
                 }
             }
@@ -99,8 +99,9 @@ public class ChatService {
         return cr;
     }
 
-    public <T> void sendMessage(WebSocketSession session, T message) {
+    public <T> void sendMessage(WebSocketSession session, T message,  ChatRoom c) {
         try{
+            chatRooms.put(c.getRoomId(), c);
             session.sendMessage(new TextMessage(mapper.writeValueAsString(message)));
         } catch (IOException e) {
             log.error(e.getMessage(), e);

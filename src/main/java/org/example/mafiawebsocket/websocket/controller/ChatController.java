@@ -34,7 +34,7 @@ public class ChatController {
 
     @GetMapping
     public List<ChatRoom> findAllRooms(){
-        return service.findWaitingAllRoom("wait");
+        return service.findWaitingAllRoom("waiting");
     }
 }
 
