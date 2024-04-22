@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.example.mafiawebsocket.websocket.dto.ChatDTO;
 import org.example.mafiawebsocket.websocket.dto.ChatRoom;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -99,10 +98,9 @@ public class ChatService {
         return cr;
     }
 
-    public <T> void sendMessage(WebSocketSession session, T message,  ChatRoom c) {
+    public <T> void sendMessage(WebSocketSession session, T message) {
         try{
-            chatRooms.put(c.getRoomId(), c);
-            session.sendMessage(new TextMessage(mapper.writeValueAsString(message)));
+                session.sendMessage(new TextMessage(mapper.writeValueAsString(message)));
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }

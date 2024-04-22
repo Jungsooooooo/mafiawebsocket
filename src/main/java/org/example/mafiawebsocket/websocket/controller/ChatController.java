@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.mafiawebsocket.websocket.dto.ChatDTO;
 import org.example.mafiawebsocket.websocket.dto.ChatRoom;
 import org.example.mafiawebsocket.websocket.service.ChatService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,8 +35,9 @@ public class ChatController {
     }
 
     @GetMapping
-    public List<ChatRoom> findAllRooms(){
-        return service.findWaitingAllRoom("waiting");
+    public ResponseEntity<?> findAllRooms(){
+
+        return new ResponseEntity<>( service.findWaitingAllRoom("waiting"), HttpStatus.OK);
     }
 }
 
