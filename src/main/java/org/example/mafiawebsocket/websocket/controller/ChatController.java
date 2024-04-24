@@ -39,5 +39,10 @@ public class ChatController {
 
         return new ResponseEntity<>( service.findWaitingAllRoom("waiting"), HttpStatus.OK);
     }
+
+    @GetMapping("/{roomId}")
+    public ResponseEntity<?> findRoomById(@PathVariable String roomId){
+        return new ResponseEntity<>( service.findRoomById(roomId), HttpStatus.OK);
+    }
 }
 
